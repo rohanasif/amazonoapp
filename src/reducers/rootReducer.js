@@ -9,6 +9,7 @@ import {
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
   GET_ALL_PRODUCTS,
+  UPDATE_STOCK,
   GET_CART_ITEMS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
@@ -27,16 +28,20 @@ const rootReducer = (state, action) => {
       return {};
     case LOGIN_ERROR:
       return {};
-    case LOGOUT:
-      return {};
     case GET_LOGGED_USER:
+      return {};
+    case LOGOUT:
       return {};
     case EDIT_USER_SUCCESS:
       return {};
     case EDIT_USER_ERROR:
       return {};
+
     case GET_ALL_PRODUCTS:
       return {};
+    case UPDATE_STOCK:
+      return {};
+
     case GET_CART_ITEMS:
       return {};
     case ADD_TO_CART:
@@ -45,6 +50,7 @@ const rootReducer = (state, action) => {
       return {};
     case EMPTY_CART:
       return {};
+
     default:
       throw new Error("Unknown action: " + action.type);
   }

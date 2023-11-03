@@ -10,6 +10,7 @@ export const GET_LOGGED_USER = "GET_LOGGED_USER";
 export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_ERROR = "EDIT_USER_ERROR";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const UPDATE_STOCK = "UPDATE_STOCK";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";

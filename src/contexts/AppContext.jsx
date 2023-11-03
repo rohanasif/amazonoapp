@@ -17,6 +17,8 @@ import {
   editUserDetails,
 } from "../actions/usersActions";
 
+import { searchProducts } from "../actions/searchActions";
+
 import { getAllProducts, updateInStockQty } from "../actions/productsActions";
 
 const initialState = { users: [], products: [], message: { text: "" } };
@@ -57,6 +59,8 @@ export const AppProvider = ({ children }) => {
 
         products,
         setProducts,
+
+        searchProducts,
 
         cart,
         setCart,
