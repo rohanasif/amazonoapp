@@ -1,11 +1,19 @@
 import { Container } from "react-bootstrap";
 import ProductsCarousel from "../components/ProductsCarousel";
 import Products from "../components/Products";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../contexts/AppContext";
 
 const Homepage = () => {
-  const { state } = useContext(AppContext);
+  const { state, getAllProducts, setProducts, dispatch } =
+    useContext(AppContext);
+  useEffect(() => {
+    const showProducts = async () => {
+      const allProducts = await getAllProducts(dispatch);
+      setProducts(allProducts);
+    };
+    showProducts();
+  }, []);
   return (
     <Container style={{ height: "60vh" }}>
       <ProductsCarousel />

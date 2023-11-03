@@ -19,7 +19,7 @@ import {
 
 import { searchProducts } from "../actions/searchActions";
 
-import { getAllProducts, updateInStockQty } from "../actions/productsActions";
+import { getAllProducts, updateStock } from "../actions/productsActions";
 
 const initialState = { users: [], products: [], message: { text: "" } };
 
@@ -76,7 +76,7 @@ export const AppProvider = ({ children }) => {
         editUserDetails,
 
         getAllProducts,
-        updateInStockQty,
+        updateStock,
 
         getCartItems,
         addToCart,
