@@ -12,8 +12,10 @@ export const getAllProducts = async (dispatch) => {
   }
 };
 
-export const updateStock = async (dispatch, productId) => {
+export const updateStock = async (dispatch, productId, qty) => {
   try {
+    const response = await axios.get(`${PRODUCTSURL}/${productId}`);
+    // TODO
   } catch (e) {
     console.error(e);
   }

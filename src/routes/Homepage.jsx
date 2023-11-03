@@ -18,7 +18,7 @@ const Homepage = () => {
     <Container style={{ height: "60vh" }}>
       <ProductsCarousel />
       <h1 className="mt-2">LATEST PRODUCTS</h1>
-      {state.message.text ? (
+      {state.message?.text ? (
         <p className="text-danger">{state.message.text}</p>
       ) : null}
       <Products />
