@@ -28,8 +28,11 @@ const Signup = () => {
       alert("Registration successful!");
       state.message.text = "";
       navigate("/login");
+    } else {
+      state.message.text = "";
+      return;
     }
-  }, [state.message]);
+  }, [state.message.text]);
 
   const handleSignup = async () => {
     await registerUser(

@@ -24,8 +24,11 @@ const Login = () => {
       alert("Login successful!");
       state.message.text = "";
       navigate("/");
+    } else {
+      state.message.text = "";
+      return;
     }
-  }, [state.message]);
+  }, [state.message.text]);
 
   const handleLogin = async () => {
     await loginUser({ email, password, isLoggedin: loggedin }, dispatch);
@@ -61,7 +64,15 @@ const Login = () => {
             required
           />
         </Form.Group>
-        {<p className="text-danger">{state.message.text}</p>}
+        <p
+          className={
+            state.message.text === "Login successful"
+              ? "text-success"
+              : "text-danger"
+          }
+        >
+          {state.message.text}
+        </p>
         <Button type="submit">Login</Button>
       </Form>
       <p className="mt-3">

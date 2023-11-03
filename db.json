@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "name": "r",
+      "email": "r@y.com",
+      "password": "1",
+      "cart": [],
+      "id": 1
+    }
+  ],
   "products": [
     {
       "name": "Airpods Wireless Bluetooth Headphones",

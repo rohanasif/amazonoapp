@@ -42,7 +42,7 @@ const rootReducer = (state, action) => {
             ? { ...user, isLoggedin: true }
             : user
         ),
-        message: "Login successful",
+        message: { text: "Login successful" },
       };
     case LOGIN_ERROR:
       return {
