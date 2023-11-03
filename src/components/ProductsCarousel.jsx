@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
-import { ProductsContext } from "../contexts/ProductsContext";
+import { AppContext } from "../contexts/AppContext";
 
 const ProductsCarousel = () => {
-  const { products } = useContext(ProductsContext);
+  const { products } = useContext(AppContext);
   const [index, setIndex] = useState(0);
   const indices = new Set();
   const [indicesArray, setIndicesArray] = useState([]);

@@ -19,26 +19,61 @@ import {
 const rootReducer = (state, action) => {
   switch (action.type) {
     case GET_USERS:
-      return {};
+      return {
+        ...state,
+        users: action.payload,
+      };
     case REGISTER_SUCCESS:
-      return {};
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+        message: { text: "Registration successful" },
+      };
     case REGISTER_ERROR:
-      return {};
+      return {
+        ...state,
+        message: { text: action.payload },
+      };
     case LOGIN_SUCCESS:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.email === action.payload.email
+            ? { ...user, isLoggedin: true }
+            : user
+        ),
+        message: "Login successful",
+      };
     case LOGIN_ERROR:
-      return {};
+      return {
+        message: { text: action.payload },
+      };
     case GET_LOGGED_USER:
-      return {};
+      return {
+        ...state,
+        users: state.users.filter((user) => user.isLoggedin),
+      };
     case LOGOUT:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.email === action.payload.email
+            ? { ...user, isLoggedin: false }
+            : user
+        ),
+        message: { text: "Logout successful" },
+      };
+
     case EDIT_USER_SUCCESS:
       return {};
     case EDIT_USER_ERROR:
       return {};
 
     case GET_ALL_PRODUCTS:
-      return {};
+      return {
+        ...state,
+        products: action.payload,
+      };
     case UPDATE_STOCK:
       return {};
 

@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { SearchContext } from "../contexts/SearchContext";
+import { AppContext } from "../contexts/AppContext";
 import Product from "../components/Product";
 import { Link } from "react-router-dom";
 const SearchedProducts = () => {
-  const { searchResults, query } = useContext(SearchContext);
+  const { searchResults, query } = useContext(AppContext);
   return (
     <div className="mt-4">
       <div className="d-flex flex-wrap justify-content-center gap-4">

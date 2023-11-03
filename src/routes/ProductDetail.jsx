@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ProductsContext } from "../contexts/ProductsContext";
+import { AppContext } from "../contexts/AppContext";
 import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import { faStarHalf as halfStar } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
 
 const ProductDetail = () => {
-  const { products } = useContext(ProductsContext);
+  const { products } = useContext(AppContext);
   const { id } = useParams();
   const [qty, setQty] = useState(1);
 
