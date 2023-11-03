@@ -1,5 +1,5 @@
 import { Form, Button } from "react-bootstrap";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../contexts/AppContext";
 const Login = () => {
@@ -16,13 +16,19 @@ const Login = () => {
   } = useContext(AppContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (state.message.text === "Login successful") {
+      setEmail("");
+      setPassword("");
+      setLoggedin(true);
+      alert("Login successful!");
+      state.message.text = "";
+      navigate("/");
+    }
+  }, [state.message]);
+
   const handleLogin = async () => {
     await loginUser({ email, password, isLoggedin: loggedin }, dispatch);
-    setEmail("");
-    setPassword("");
-    setLoggedin(true);
-    alert("Login successful!");
-    navigate("/");
   };
 
   return (
