@@ -39,7 +39,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const res = await getLoggedUser(dispatch);
+      const res = await getLoggedUser();
       setLoggedin(res?.isLoggedin);
     };
     checkLogin();

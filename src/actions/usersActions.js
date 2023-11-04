@@ -73,7 +73,7 @@ export const loginUser = async (user, dispatch) => {
   }
 };
 
-export const getLoggedUser = async (dispatch) => {
+export const getLoggedUser = async () => {
   try {
     const response = await axios.get(`${USERSURL}?isLoggedin=true`);
     const userArr = response.data;
