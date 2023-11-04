@@ -22,7 +22,7 @@ export const getCartItems = async (dispatch, userId) => {
 export const addToCart = async (dispatch, userId, productId, qty) => {
   try {
     const productResponse = await axios.get(`${PRODUCTSURL}/${productId}`);
-    const productToAdd = productResponse.data;
+    const productToAdd = { ...productResponse.data, quantity: 0 };
     const inStockQty = productToAdd.countInStock;
     const cartItems = await getCartItems(dispatch, userId);
     const isInCart = cartItems.find((item) => item?.id === productId);

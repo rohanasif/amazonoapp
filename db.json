@@ -12,24 +12,11 @@
           "brand": "Apple",
           "category": "Electronics",
           "price": 89.99,
-          "countInStock": 957,
+          "countInStock": 955,
           "rating": 3,
           "numReviews": 10,
           "id": 1,
-          "quantity": 31
-        },
-        {
-          "name": "iPhone 11 Pro 256GB Memory",
-          "image": "/images/phone.jpg",
-          "description": "Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life",
-          "brand": "Apple",
-          "category": "Electronics",
-          "price": 599.99,
-          "countInStock": 987,
-          "rating": 4.5,
-          "numReviews": 4,
-          "id": 2,
-          "quantity": 1
+          "quantity": 33
         }
       ],
       "id": 1,
@@ -44,11 +31,10 @@
       "brand": "Apple",
       "category": "Electronics",
       "price": 89.99,
-      "countInStock": 957,
+      "countInStock": 955,
       "rating": 3,
       "numReviews": 10,
-      "id": 1,
-      "quantity": 31
+      "id": 1
     },
     {
       "name": "iPhone 11 Pro 256GB Memory",
@@ -57,11 +43,10 @@
       "brand": "Apple",
       "category": "Electronics",
       "price": 599.99,
-      "countInStock": 987,
+      "countInStock": 10,
       "rating": 4.5,
       "numReviews": 4,
-      "id": 2,
-      "quantity": 1
+      "id": 2
     },
     {
       "name": "Cannon EOS 80D DSLR Camera",
@@ -73,8 +58,7 @@
       "countInStock": 0,
       "rating": 3,
       "numReviews": 5,
-      "id": 3,
-      "quantity": 0
+      "id": 3
     },
     {
       "name": "Sony Playstation 4 Pro White Version",
@@ -86,8 +70,7 @@
       "countInStock": 10,
       "rating": 2,
       "numReviews": 4,
-      "id": 4,
-      "quantity": 0
+      "id": 4
     },
     {
       "name": "Logitech G-Series Gaming Mouse",
@@ -99,8 +82,7 @@
       "countInStock": 7,
       "rating": 4.5,
       "numReviews": 3,
-      "id": 5,
-      "quantity": 0
+      "id": 5
     },
     {
       "name": "Amazon Echo Dot 3rd Generation",
@@ -112,8 +94,7 @@
       "countInStock": 0,
       "rating": 2.5,
       "numReviews": 2,
-      "id": 6,
-      "quantity": 0
+      "id": 6
     }
   ],
   "message": {
