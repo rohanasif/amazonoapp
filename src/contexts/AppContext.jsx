@@ -5,22 +5,20 @@ import {
   getCartItems,
   addToCart,
   removeFromCart,
+  updateCartQuantity,
   emptyCart,
   updateStock,
-} from "../actions/cartActions";
-
-import {
+  getAllProducts,
+  getProduct,
   getUsers,
   registerUser,
   loginUser,
   getLoggedUser,
   logoutUser,
   editUserDetails,
-} from "../actions/usersActions";
+} from "../actions/appActions";
 
 import { searchProducts } from "../actions/searchActions";
-
-import { getAllProducts } from "../actions/productsActions";
 
 const initialState = { users: [], products: [], message: { text: "" } };
 
@@ -77,12 +75,14 @@ export const AppProvider = ({ children }) => {
         editUserDetails,
 
         getAllProducts,
+        getProduct,
         updateStock,
 
         getCartItems,
         addToCart,
         removeFromCart,
         emptyCart,
+        updateCartQuantity,
 
         searchResults,
         setSearchResults,
