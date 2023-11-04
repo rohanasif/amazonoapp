@@ -77,11 +77,73 @@ const rootReducer = (state, action) => {
         ),
       };
     case ADD_TO_CART:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.isLoggedin
+            ? {
+                ...user,
+                cart: user.cart.map((item) =>
+                  item.id === action.payload.productId
+                    ? (item.quantity += action.payload.qty)
+                    : item
+                ),
+              }
+            : user
+        ),
+        products: state.products.map((product) =>
+          product.id === action.payload.productId
+            ? (product.countInStock -= action.payload.qty)
+            : product
+        ),
+        message: {
+          text: `${
+            state.products[action.payload.productId - 1]
+          } added to cart!`,
+        },
+      };
     case REMOVE_FROM_CART:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.isLoggedin
+            ? {
+                ...user,
+                cart: user.cart.map((item) =>
+                  item.id === action.payload.productId
+                    ? (item.quantity = 0)
+                    : item
+                ),
+              }
+            : user
+        ),
+        products: state.products.map((product) =>
+          product.id === action.payload.productId
+            ? (product.countInStock += state.users[
+                action.payload.userId - 1
+              ].cart.find(
+                (item) => item.id === action.payload.productId
+              ).quantity)
+            : product
+        ),
+        message: {
+          text: `${
+            state.products[action.payload.productId - 1]
+          } removed from cart!`,
+        },
+      };
     case EMPTY_CART:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.isLoggedin
+            ? {
+                ...user,
+                cart: [],
+              }
+            : user
+        ),
+      };
     case UPDATE_STOCK:
       return {};
 

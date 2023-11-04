@@ -212,8 +212,7 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
 
 export const removeFromCart = async (dispatch, userId, productId) => {
   try {
-    const productResponse = await axios.get(`${PRODUCTSURL}/${productId}`);
-    const productToRemove = productResponse.data;
+    const productToRemove = getProduct(productId);
     const inStockQty = productToRemove.countInStock;
     const cartItems = await getCartItems(dispatch, userId);
     const qtyInCart = cartItems.filter(
@@ -235,15 +234,11 @@ export const removeFromCart = async (dispatch, userId, productId) => {
 
 export const updateCartQuantity = async (dispatch, userId, update) => {
   try {
-    const response = await axios.get(`${USERSURL}/${userId}`);
-    const cart = response.data.cart;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const emptyCart = async (dispatch, userId) => {
-  try {
+    const cart = await getCartItems(dispatch, userId);
+    if (update === "ADD_TO_CART") {
+    } else if (update === "REMOVE_FROM_CART") {
+    } else if (update === "EMPTY_CART") {
+    }
   } catch (e) {
     console.error(e);
   }
