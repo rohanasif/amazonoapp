@@ -6,7 +6,6 @@ export const REGISTER_ERROR = "REGISTER_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGOUT = "LOGOUT";
-export const GET_LOGGED_USER = "GET_LOGGED_USER";
 export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_ERROR = "EDIT_USER_ERROR";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";

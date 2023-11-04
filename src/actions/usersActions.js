@@ -6,7 +6,6 @@ import {
   REGISTER_ERROR,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
-  GET_LOGGED_USER,
   LOGOUT,
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
@@ -79,7 +78,6 @@ export const getLoggedUser = async (dispatch) => {
     const response = await axios.get(`${USERSURL}?isLoggedin=true`);
     const userArr = response.data;
     const user = userArr[0];
-    dispatch({ type: GET_LOGGED_USER });
     return user;
   } catch (e) {
     console.error(e);

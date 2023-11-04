@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 
 const Product = ({ product, i }) => {
-  const { dispatch, addToCart, getLoggedUser} = useContext(AppContext);
+  const { dispatch, addToCart, getLoggedUser } = useContext(AppContext);
   const [quantity, setQuantity] = useState(1);
 
   const handleAdd = async (i) => {

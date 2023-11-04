@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PRODUCTSURL, GET_ALL_PRODUCTS, UPDATE_STOCK } from "../constants";
+import { PRODUCTSURL, GET_ALL_PRODUCTS } from "../constants";
 
 export const getAllProducts = async (dispatch) => {
   try {
@@ -7,15 +7,6 @@ export const getAllProducts = async (dispatch) => {
     const products = response.data;
     dispatch({ type: GET_ALL_PRODUCTS, payload: products });
     return products;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const updateStock = async (dispatch, productId, qty) => {
-  try {
-    const response = await axios.get(`${PRODUCTSURL}/${productId}`);
-    // TODO
   } catch (e) {
     console.error(e);
   }

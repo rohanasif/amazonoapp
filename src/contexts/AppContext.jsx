@@ -6,6 +6,7 @@ import {
   addToCart,
   removeFromCart,
   emptyCart,
+  updateStock,
 } from "../actions/cartActions";
 
 import {
@@ -19,7 +20,7 @@ import {
 
 import { searchProducts } from "../actions/searchActions";
 
-import { getAllProducts, updateStock } from "../actions/productsActions";
+import { getAllProducts } from "../actions/productsActions";
 
 const initialState = { users: [], products: [], message: { text: "" } };
 

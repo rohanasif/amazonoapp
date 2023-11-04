@@ -5,15 +5,14 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  GET_LOGGED_USER,
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
   GET_ALL_PRODUCTS,
-  UPDATE_STOCK,
   GET_CART_ITEMS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   EMPTY_CART,
+  UPDATE_STOCK,
 } from "../constants";
 
 const rootReducer = (state, action) => {
@@ -48,11 +47,6 @@ const rootReducer = (state, action) => {
       return {
         message: { text: action.payload },
       };
-    case GET_LOGGED_USER:
-      return {
-        ...state,
-        users: state.users.filter((user) => user.isLoggedin),
-      };
     case LOGOUT:
       return {
         ...state,
@@ -74,16 +68,23 @@ const rootReducer = (state, action) => {
         ...state,
         products: action.payload,
       };
-    case UPDATE_STOCK:
-      return {};
 
     case GET_CART_ITEMS:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.userId
+            ? { ...user, cart: action.payload }
+            : user
+        ),
+      };
     case ADD_TO_CART:
       return {};
     case REMOVE_FROM_CART:
       return {};
     case EMPTY_CART:
+      return {};
+    case UPDATE_STOCK:
       return {};
 
     default:
