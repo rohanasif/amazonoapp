@@ -12,15 +12,28 @@
           "brand": "Apple",
           "category": "Electronics",
           "price": 89.99,
-          "countInStock": 976,
+          "countInStock": 957,
           "rating": 3,
           "numReviews": 10,
           "id": 1,
-          "quantity": 12
+          "quantity": 31
+        },
+        {
+          "name": "iPhone 11 Pro 256GB Memory",
+          "image": "/images/phone.jpg",
+          "description": "Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life",
+          "brand": "Apple",
+          "category": "Electronics",
+          "price": 599.99,
+          "countInStock": 987,
+          "rating": 4.5,
+          "numReviews": 4,
+          "id": 2,
+          "quantity": 1
         }
       ],
       "id": 1,
-      "isLoggedin": true
+      "isLoggedin": false
     }
   ],
   "products": [
@@ -31,11 +44,11 @@
       "brand": "Apple",
       "category": "Electronics",
       "price": 89.99,
-      "countInStock": 976,
+      "countInStock": 957,
       "rating": 3,
       "numReviews": 10,
       "id": 1,
-      "quantity": 12
+      "quantity": 31
     },
     {
       "name": "iPhone 11 Pro 256GB Memory",
@@ -44,11 +57,11 @@
       "brand": "Apple",
       "category": "Electronics",
       "price": 599.99,
-      "countInStock": 988,
+      "countInStock": 987,
       "rating": 4.5,
       "numReviews": 4,
       "id": 2,
-      "quantity": 0
+      "quantity": 1
     },
     {
       "name": "Cannon EOS 80D DSLR Camera",

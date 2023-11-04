@@ -66,7 +66,8 @@ const Login = () => {
         </Form.Group>
         <p
           className={
-            state.message.text === "Login successful"
+            state.message.text === "Login successful" ||
+            state.message.text === "Logout successful"
               ? "text-success"
               : "text-danger"
           }

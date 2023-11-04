@@ -73,9 +73,7 @@ const rootReducer = (state, action) => {
       return {
         ...state,
         users: state.users.map((user) =>
-          user.id === action.payload.userId
-            ? { ...user, cart: action.payload }
-            : user
+          user.isLoggedin ? { ...user, cart: action.payload } : user
         ),
       };
     case ADD_TO_CART:

@@ -94,7 +94,7 @@ export const logoutUser = async (user, dispatch) => {
       dispatch({ type: LOGOUT, payload: response.data });
     } else {
       error = "User not logged in! Please refresh!";
-      console.log(error);
+      alert(error);
     }
   } catch (e) {
     console.error(e);
