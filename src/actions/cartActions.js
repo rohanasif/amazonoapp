@@ -78,9 +78,10 @@ export const emptyCart = async () => {};
 
 export const updateStock = async (productId, updatedProduct) => {
   try {
+    const { quantity, ...product } = updatedProduct;
     const updateResponse = await axios.patch(
       `${PRODUCTSURL}/${productId}`,
-      updatedProduct
+      product
     );
     const updatedStock = updateResponse.data.countInStock;
     console.log(updatedStock);
