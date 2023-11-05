@@ -232,12 +232,15 @@ export const removeFromCart = async (dispatch, userId, productId) => {
   }
 };
 
-export const updateCartQuantity = async (dispatch, userId, update) => {
+export const emptyCart = async (dispatch, userId) => {};
+
+export const updateCartQuantity = async (dispatch, userId, updateType, qty) => {
   try {
     const cart = await getCartItems(dispatch, userId);
-    if (update === "ADD_TO_CART") {
-    } else if (update === "REMOVE_FROM_CART") {
-    } else if (update === "EMPTY_CART") {
+    if (updateType === "ADD_TO_CART") {
+
+    } else if (updateType === "REMOVE_FROM_CART") {
+    } else if (updateType === "EMPTY_CART") {
     }
   } catch (e) {
     console.error(e);

@@ -7,12 +7,13 @@ import {
   LOGOUT,
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
+  UPDATE_STOCK,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  UPDATE_CART,
   EMPTY_CART,
-  UPDATE_STOCK,
 } from "../constants";
 
 const rootReducer = (state, action) => {
@@ -97,9 +98,7 @@ const rootReducer = (state, action) => {
             : product
         ),
         message: {
-          text: `${
-            state.products[action.payload.productId - 1]
-          } added to cart!`,
+          text: `${action.payload} added to cart!`,
         },
       };
     case REMOVE_FROM_CART:
@@ -127,9 +126,7 @@ const rootReducer = (state, action) => {
             : product
         ),
         message: {
-          text: `${
-            state.products[action.payload.productId - 1]
-          } removed from cart!`,
+          text: `${action.payload} removed from cart!`,
         },
       };
     case EMPTY_CART:
