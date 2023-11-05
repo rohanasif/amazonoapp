@@ -12,11 +12,11 @@
           "brand": "Apple",
           "category": "Electronics",
           "price": 89.99,
-          "countInStock": 1081,
+          "countInStock": 1076,
           "rating": 3,
           "numReviews": 10,
           "id": 1,
-          "quantity": 1
+          "quantity": 6
         }
       ],
       "id": 1,
@@ -31,7 +31,7 @@
       "brand": "Apple",
       "category": "Electronics",
       "price": 89.99,
-      "countInStock": 1081,
+      "countInStock": 1077,
       "rating": 3,
       "numReviews": 10,
       "id": 1,
@@ -47,7 +47,8 @@
       "countInStock": 10,
       "rating": 4.5,
       "numReviews": 4,
-      "id": 2
+      "id": 2,
+      "quantity": 1
     },
     {
       "name": "Cannon EOS 80D DSLR Camera",

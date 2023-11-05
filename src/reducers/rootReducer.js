@@ -5,8 +5,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  EDIT_USER_SUCCESS,
-  EDIT_USER_ERROR,
+  // EDIT_USER_SUCCESS,
+  // EDIT_USER_ERROR,
   UPDATE_STOCK,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
@@ -60,10 +60,10 @@ const rootReducer = (state, action) => {
         message: { text: "Logout successful" },
       };
 
-    case EDIT_USER_SUCCESS:
-      return {};
-    case EDIT_USER_ERROR:
-      return {};
+    // case EDIT_USER_SUCCESS:
+    //   return {};
+    // case EDIT_USER_ERROR:
+    //   return {};
 
     // PRODUCT CASES
     case GET_ALL_PRODUCTS:

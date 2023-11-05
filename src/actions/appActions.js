@@ -140,7 +140,10 @@ export const getProduct = async (productId) => {
 
 export const updateStock = async (dispatch, productId, updatedProduct) => {
   try {
-    await axios.patch(`${PRODUCTSURL}/${productId}`, updatedProduct);
+    const response = await axios.patch(
+      `${PRODUCTSURL}/${productId}`,
+      updatedProduct
+    );
     dispatch({
       type: UPDATE_STOCK,
       payload: { updatedProduct, productId },
