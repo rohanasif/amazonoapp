@@ -8,8 +8,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT,
-  EDIT_USER_SUCCESS,
-  EDIT_USER_ERROR,
+  // EDIT_USER_SUCCESS,
+  // EDIT_USER_ERROR,
   UPDATE_STOCK,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
@@ -114,14 +114,14 @@ export const logoutUser = async (user, dispatch) => {
   }
 };
 
-export const editUserDetails = async () => {};
+// export const editUserDetails = async () => {};
 
 // Product Actions
 export const getAllProducts = async (dispatch) => {
   try {
     const response = await axios.get(`${PRODUCTSURL}`);
     const products = response.data;
-    dispatch({ type: GET_ALL_PRODUCTS, payload: products });
+    dispatch({ type: GET_ALL_PRODUCTS, payload: products.data });
     return products;
   } catch (e) {
     console.error(e);
@@ -187,7 +187,9 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
         quantity: productToAdd.quantity + qty,
         countInStock: inStockQty - qty,
       };
+
       await updateStock(dispatch, productId, updatedProduct);
+
       let updatedCartItems;
       if (!isInCart) {
         updatedCartItems = [...cartItems, updatedProduct];
@@ -202,11 +204,8 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
             : item
         );
       }
-      const updatedCartResponse = await axios.patch(`${USERSURL}/${userId}`, {
-        cart: updatedCartItems,
-      });
-      const updatedCart = updatedCartResponse.data;
-      dispatch({ type: ADD_TO_CART, payload: updatedCart });
+
+      await updateCart(dispatch, userId, updatedCartItems);
     }
   } catch (e) {
     console.error(e);
@@ -218,6 +217,8 @@ export const removeFromCart = async (dispatch, userId, productId) => {
     const productToRemove = await getProduct(productId);
     const inStockQty = productToRemove.countInStock;
     const cartItems = await getCartItems(dispatch, userId);
+    const updatedCart = cartItems.filter((item) => item.id !== productId);
+    await updateCart(dispatch, userId, updatedCart);
     const qtyInCart =
       cartItems.find((item) => item.id === productId)?.quantity || 0;
     const updatedProduct = {
@@ -225,10 +226,8 @@ export const removeFromCart = async (dispatch, userId, productId) => {
       countInStock: inStockQty + qtyInCart,
     };
     await updateStock(dispatch, productId, updatedProduct);
-    dispatch({ type: UPDATE_STOCK, payload: updatedProduct });
     const { quantity, ...cartItem } = updatedProduct;
     dispatch({ type: REMOVE_FROM_CART, payload: cartItem });
-    dispatch;
   } catch (e) {
     console.error(e);
   }
@@ -244,40 +243,13 @@ export const emptyCart = async (dispatch, userId) => {
 };
 
 // Cart Update Action
-export const updateCart = async (
-  dispatch,
-  userId,
-  productId,
-  qty,
-  updateType
-) => {
+export const updateCart = async (dispatch, userId, updatedCart) => {
   try {
-    const cart = getCartItems(dispatch, userId);
-    const product = cart.find((item) => item.id === productId);
-    let updatedCart = [];
-
-    if (updateType === "ADD") {
-      const response = await axios.patch(`${USERSURL}/${userId}`, {
-        cart: cart.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: product.quantity + qty }
-            : item
-        ),
-      });
-      updatedCart = response.data.cart;
-    } else if (updateType === "REMOVE") {
-      const response = await axios.patch(`${USERSURL}/${userId}`, {
-        cart: cart.map((item) =>
-          item.id === productId ? { ...item, quantity: 0 } : item
-        ),
-      });
-      updatedCart = response.data.cart;
-    } else if (updateType === "EMPTY") {
-      const response = await axios.patch(`${USERSURL}/${userId}`, { cart: [] });
-      updatedCart = response.data.cart;
-    }
-
-    dispatch({ type: UPDATE_CART, payload: updatedCart });
+    await axios.patch(`${USERSURL}/${userId}`, { cart: updatedCart });
+    dispatch({
+      type: UPDATE_CART,
+      payload: { updatedCart, userId },
+    });
   } catch (e) {
     console.error(e);
   }

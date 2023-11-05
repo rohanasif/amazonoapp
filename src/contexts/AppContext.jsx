@@ -15,7 +15,7 @@ import {
   loginUser,
   getLoggedUser,
   logoutUser,
-  editUserDetails,
+  // editUserDetails,
 } from "../actions/appActions";
 
 import { searchProducts } from "../actions/searchActions";
@@ -72,7 +72,7 @@ export const AppProvider = ({ children }) => {
         loginUser,
         getLoggedUser,
         logoutUser,
-        editUserDetails,
+        // editUserDetails,
 
         getAllProducts,
         getProduct,
