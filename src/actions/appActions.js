@@ -136,13 +136,11 @@ export const getProduct = async (productId) => {
 
 export const updateStock = async (dispatch, productId, updatedProduct) => {
   try {
-    const response = await axios.patch(
-      `${PRODUCTSURL}/${productId}`,
-      updatedProduct
-    );
-    dispatch({ type: UPDATE_STOCK, payload: { updatedProduct, productId } });
-    const update = response.data;
-    console.log(update);
+    await axios.patch(`${PRODUCTSURL}/${productId}`, updatedProduct);
+    dispatch({
+      type: UPDATE_STOCK,
+      payload: { updatedProduct, productId },
+    });
   } catch (e) {
     console.error(e);
   }
@@ -187,7 +185,7 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
         quantity: productToAdd.quantity + qty,
         countInStock: inStockQty - qty,
       };
-      await updateStock(productId, updatedProduct);
+      await updateStock(dispatch, productId, updatedProduct);
       let updatedCartItems;
       if (!isInCart) {
         updatedCartItems = [...cartItems, updatedProduct];
