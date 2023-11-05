@@ -73,7 +73,14 @@ const rootReducer = (state, action) => {
       };
 
     case UPDATE_STOCK:
-      return {};
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          product.id === action.payload.productId
+            ? action.payload.updatedProduct
+            : product
+        ),
+      };
 
     // CART CASES
     case GET_CART_ITEMS:

@@ -140,8 +140,9 @@ export const updateStock = async (dispatch, productId, updatedProduct) => {
       `${PRODUCTSURL}/${productId}`,
       updatedProduct
     );
-    const updatedStock = response.data.countInStock;
-    console.log(updatedStock);
+    dispatch({ type: UPDATE_STOCK, payload: { updatedProduct, productId } });
+    const update = response.data;
+    console.log(update);
   } catch (e) {
     console.error(e);
   }
