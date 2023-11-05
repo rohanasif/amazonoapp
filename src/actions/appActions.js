@@ -130,14 +130,16 @@ export const getProduct = async (productId) => {
     const product = response.data;
     return product;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
 export const updateStock = async (dispatch, productId, updatedProduct) => {
   try {
-    const { quantity, ...product } = updatedProduct;
-    const response = await axios.patch(`${PRODUCTSURL}/${productId}`, product);
+    const response = await axios.patch(
+      `${PRODUCTSURL}/${productId}`,
+      updatedProduct
+    );
     const updatedStock = response.data.countInStock;
     console.log(updatedStock);
   } catch (e) {
@@ -234,11 +236,11 @@ export const removeFromCart = async (dispatch, userId, productId) => {
 
 export const emptyCart = async (dispatch, userId) => {};
 
+// QUANTITY AND STOCK UPDATE ACTIONS
 export const updateCartQuantity = async (dispatch, userId, updateType, qty) => {
   try {
     const cart = await getCartItems(dispatch, userId);
     if (updateType === "ADD_TO_CART") {
-
     } else if (updateType === "REMOVE_FROM_CART") {
     } else if (updateType === "EMPTY_CART") {
     }

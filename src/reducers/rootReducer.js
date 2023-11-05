@@ -18,6 +18,7 @@ import {
 
 const rootReducer = (state, action) => {
   switch (action.type) {
+    // USER CASES
     case GET_USERS:
       return {
         ...state,
@@ -64,12 +65,17 @@ const rootReducer = (state, action) => {
     case EDIT_USER_ERROR:
       return {};
 
+    // PRODUCT CASES
     case GET_ALL_PRODUCTS:
       return {
         ...state,
         products: action.payload,
       };
 
+    case UPDATE_STOCK:
+      return {};
+
+    // CART CASES
     case GET_CART_ITEMS:
       return {
         ...state,
@@ -141,7 +147,8 @@ const rootReducer = (state, action) => {
             : user
         ),
       };
-    case UPDATE_STOCK:
+
+    case UPDATE_CART:
       return {};
 
     default:
