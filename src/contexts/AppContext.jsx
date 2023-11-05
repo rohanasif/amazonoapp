@@ -5,7 +5,7 @@ import {
   getCartItems,
   addToCart,
   removeFromCart,
-  updateCartQuantity,
+  updateCart,
   emptyCart,
   updateStock,
   getAllProducts,
@@ -82,7 +82,7 @@ export const AppProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         emptyCart,
-        updateCartQuantity,
+        updateCart,
 
         searchResults,
         setSearchResults,

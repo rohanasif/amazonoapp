@@ -156,7 +156,17 @@ const rootReducer = (state, action) => {
       };
 
     case UPDATE_CART:
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.isLoggedin
+            ? {
+                ...user,
+                cart: action.payload,
+              }
+            : user
+        ),
+      };
 
     default:
       throw new Error("Unknown action: " + action.type);

@@ -19,7 +19,7 @@ import {
   EMPTY_CART,
 } from "../constants";
 
-// USER ACTIONS
+// User Actions
 export const getUsers = async (dispatch) => {
   try {
     const response = await axios.get(USERSURL);
@@ -35,10 +35,13 @@ export const registerUser = async (user, dispatch) => {
   const { repeatPassword, ...userToRegister } = user;
   const allUsers = await getUsers(dispatch);
   let error = null;
+
   if (user.password !== user.repeatPassword) {
     error = "Passwords don't match";
-  }
-  if (allUsers.length === 0 || !allUsers.find((u) => u.email === user.email)) {
+  } else if (
+    allUsers.length === 0 ||
+    !allUsers.find((u) => u.email === user.email)
+  ) {
     try {
       const response = await axios.post(USERSURL, userToRegister);
       dispatch({ type: REGISTER_SUCCESS, payload: response.data });
@@ -49,6 +52,7 @@ export const registerUser = async (user, dispatch) => {
   } else {
     error = "User already registered";
   }
+
   if (error) {
     dispatch({ type: REGISTER_ERROR, payload: error });
   }
@@ -61,13 +65,13 @@ export const loginUser = async (user, dispatch) => {
       u.password === user.password &&
       (u.name === user.name || u.email === user.email)
   );
+
   if (user.isLoggedin) {
     dispatch({
       type: LOGIN_ERROR,
-      payload: `${user.name} is already logged in!. Go to <Link to={"/"}>Home</Link>`,
+      payload: `${user.name} is already logged in! Go to <Link to={"/"}>Home</Link>`,
     });
-  }
-  if (userLoggingIn) {
+  } else if (userLoggingIn) {
     try {
       const response = await axios.patch(`${USERSURL}/${userLoggingIn.id}`, {
         ...user,
@@ -78,7 +82,7 @@ export const loginUser = async (user, dispatch) => {
       console.error(e);
     }
   } else {
-    dispatch({ type: "LOGIN_ERROR", payload: "Invalid Credentials" });
+    dispatch({ type: LOGIN_ERROR, payload: "Invalid Credentials" });
   }
 };
 
@@ -112,7 +116,7 @@ export const logoutUser = async (user, dispatch) => {
 
 export const editUserDetails = async () => {};
 
-// PRODUCT ACTIONS
+// Product Actions
 export const getAllProducts = async (dispatch) => {
   try {
     const response = await axios.get(`${PRODUCTSURL}`);
@@ -146,7 +150,7 @@ export const updateStock = async (dispatch, productId, updatedProduct) => {
   }
 };
 
-// CART ACTIONS
+// Cart Actions
 export const getCartItems = async (dispatch, userId) => {
   try {
     const response = await axios.get(`${USERSURL}/${userId}`);
@@ -175,9 +179,7 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
     if (qty + totalQuantityInCart > inStockQty) {
       dispatch({
         type: ADD_TO_CART,
-        payload: {
-          message: `Not enough stock for ${productToAdd.name}`,
-        },
+        payload: { message: `Not enough stock for ${productToAdd.name}` },
       });
     } else {
       const updatedProduct = {
@@ -213,17 +215,16 @@ export const addToCart = async (dispatch, userId, productId, qty) => {
 
 export const removeFromCart = async (dispatch, userId, productId) => {
   try {
-    const productToRemove = getProduct(productId);
+    const productToRemove = await getProduct(productId);
     const inStockQty = productToRemove.countInStock;
     const cartItems = await getCartItems(dispatch, userId);
-    const qtyInCart = cartItems.filter(
-      (item) => item.id === productId
-    ).quantity;
+    const qtyInCart =
+      cartItems.find((item) => item.id === productId)?.quantity || 0;
     const updatedProduct = {
       ...productToRemove,
       countInStock: inStockQty + qtyInCart,
     };
-    await updateStock(productId, updatedProduct);
+    await updateStock(dispatch, productId, updatedProduct);
     dispatch({ type: UPDATE_STOCK, payload: updatedProduct });
     const { quantity, ...cartItem } = updatedProduct;
     dispatch({ type: REMOVE_FROM_CART, payload: cartItem });
@@ -233,16 +234,50 @@ export const removeFromCart = async (dispatch, userId, productId) => {
   }
 };
 
-export const emptyCart = async (dispatch, userId) => {};
-
-// QUANTITY AND STOCK UPDATE ACTIONS
-export const updateCartQuantity = async (dispatch, userId, updateType, qty) => {
+export const emptyCart = async (dispatch, userId) => {
   try {
-    const cart = await getCartItems(dispatch, userId);
-    if (updateType === "ADD_TO_CART") {
-    } else if (updateType === "REMOVE_FROM_CART") {
-    } else if (updateType === "EMPTY_CART") {
+    await axios.patch(`${USERSURL}/${userId}`, { cart: [] });
+    dispatch({ type: EMPTY_CART });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+// Cart Update Action
+export const updateCart = async (
+  dispatch,
+  userId,
+  productId,
+  qty,
+  updateType
+) => {
+  try {
+    const cart = getCartItems(dispatch, userId);
+    const product = cart.find((item) => item.id === productId);
+    let updatedCart = [];
+
+    if (updateType === "ADD") {
+      const response = await axios.patch(`${USERSURL}/${userId}`, {
+        cart: cart.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: product.quantity + qty }
+            : item
+        ),
+      });
+      updatedCart = response.data.cart;
+    } else if (updateType === "REMOVE") {
+      const response = await axios.patch(`${USERSURL}/${userId}`, {
+        cart: cart.map((item) =>
+          item.id === productId ? { ...item, quantity: 0 } : item
+        ),
+      });
+      updatedCart = response.data.cart;
+    } else if (updateType === "EMPTY") {
+      const response = await axios.patch(`${USERSURL}/${userId}`, { cart: [] });
+      updatedCart = response.data.cart;
     }
+
+    dispatch({ type: UPDATE_CART, payload: updatedCart });
   } catch (e) {
     console.error(e);
   }
